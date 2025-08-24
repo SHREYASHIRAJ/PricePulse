@@ -188,16 +188,6 @@ python -c "from backend.scraper import get_price_comparison; print('Scraper load
 python -c "from backend.api_client import get_price_comparison_api; print('API client loads successfully')"
 ```
 
-##  Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Fork the Repository**
-2. **Create a Feature Branch**
-3. **Commit Your Changes**
-4. **Push to the Branch**
-5. **Open a Pull Request**
-
 
 ##  License
 
@@ -218,21 +208,3 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
-
-
-### Reporting Issues
-1. **Check Existing Issues** - Search before creating new ones
-2. **Provide Details** - Include steps to reproduce
-3. **Add Screenshots** - Visual aids are helpful
-4. **Environment Info** - Python version, OS, browser
-
----
-
-<p align="center">
-  Made with ❤️ for smart shoppers everywhere
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/github/stars/yourusername/pricepulse?style=social" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/forks/yourusername/pricepulse?style=social" alt="GitHub Forks">
-</p>
