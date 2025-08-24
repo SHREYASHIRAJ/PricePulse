@@ -1,4 +1,4 @@
-# PricePulse 📊
+# PricePulse 
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.7%2B-blue?logo=python" alt="Python Version">
@@ -8,34 +8,28 @@
 </p>
 
 <p align="center">
-  <strong>A beautiful, modern price comparison application for Indian e-commerce platforms</strong>
+  <strong>A modern price comparison application for Indian e-commerce platforms</strong>
 </p>
 
-## 🌟 Overview
+##  Overview
 
-PricePulse is an elegant price comparison tool that helps you find the best deals across major Indian e-commerce platforms. With its beautiful modern interface and dual data retrieval methods, PricePulse makes price comparison simple, fast, and visually appealing.
+PricePulse is an price comparison tool that helps you find the best deals across major Indian e-commerce platforms. With its modern interface and dual data retrieval methods, PricePulse makes price comparison simple, fast, and visually appealing.
 
-## ✨ Key Features
+##  Key Features
 
-### 🎨 Beautiful Modern UI
-- **Gradient Design**: Stunning color gradients and modern aesthetics
-- **Responsive Layout**: Works perfectly on desktop, tablet, and mobile
-- **Smooth Animations**: Subtle animations for enhanced user experience
-- **Platform-Specific Styling**: Unique colors for each e-commerce platform
-
-### 🔧 Dual Data Retrieval Methods
+###  Dual Data Retrieval Methods
 - **Web Scraping**: Direct HTML parsing for real-time data
 - **API Method**: Structured API calls (conceptual implementation)
 - **Method Switching**: Easily toggle between approaches
 - **Intelligent Fallbacks**: Automatic retry mechanisms
 
-### 🚀 Enhanced Functionality
+###  Enhanced Functionality
 - **Real-time Comparison**: Instant price comparisons across platforms
 - **Smart Retry System**: Exponential backoff for failed requests
 - **Generic Search**: Fallback search for better results
 - **Comprehensive Error Handling**: Clear, actionable error messages
 
-## 🛒 Supported Platforms
+##  Supported Platforms
 
 | Platform | Method | Status |
 |----------|--------|--------|
@@ -43,14 +37,14 @@ PricePulse is an elegant price comparison tool that helps you find the best deal
 | 🛒 Amazon India | Scraping | ✅ Working |
 | 🛒 Reliance Digital | Scraping | ⚠️ Structure Changes |
 
-## 📦 Prerequisites
+##  Prerequisites
 
 - **Python**: 3.7 or higher
 - **Operating System**: Windows, macOS, or Linux
 - **Internet Connection**: Required for data retrieval
 - **Browser**: Any modern web browser
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Installation
 ```bash
@@ -77,13 +71,13 @@ http://localhost:5000
 4. Compare prices across platforms
 5. Click product links to visit the store
 
-## 🔄 Data Flow
+##  Data Flow
 
 ```
 User Input → Method Selection → Data Retrieval → Result Processing → UI Display
 ```
 
-## 🎨 User Interface
+##  User Interface
 
 ### Modern Dashboard
 - **Gradient Header**: Beautiful purple-to-blue gradient
@@ -98,7 +92,7 @@ Tablet: 2 columns
 Mobile: 1 column
 ```
 
-## 🔧 Technical Architecture
+##  Technical Architecture
 
 ### Backend (Python/Flask)
 ```
@@ -121,7 +115,7 @@ frontend/
 - **Requests**: HTTP library
 - **Flask-CORS**: Cross-origin resource sharing
 
-## 🧠 Data Retrieval Methods
+##  Data Retrieval Methods
 
 ### Web Scraping Approach
 ```
@@ -149,7 +143,7 @@ Cons:
 ⚠ Rate limits and quotas
 ```
 
-## 🐛 Troubleshooting Guide
+##  Troubleshooting Guide
 
 ### Common Issues
 
@@ -166,7 +160,7 @@ Cons:
 3. **Rate Limiting**: Wait between searches
 4. **Method Switching**: Try both scraping and API methods
 
-## 🛠️ Development
+##  Development
 
 ### Project Structure
 ```
@@ -194,7 +188,7 @@ python -c "from backend.scraper import get_price_comparison; print('Scraper load
 python -c "from backend.api_client import get_price_comparison_api; print('API client loads successfully')"
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Here's how you can help:
 
@@ -204,14 +198,8 @@ We welcome contributions! Here's how you can help:
 4. **Push to the Branch**
 5. **Open a Pull Request**
 
-### Areas for Contribution
-- ✨ UI/UX Improvements
-- 🔧 New Platform Support
-- 🐛 Bug Fixes
-- 📚 Documentation
-- 🚀 Performance Enhancements
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -231,16 +219,6 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 
-## 🙏 Acknowledgements
-
-- **Flask Team** - Excellent web framework
-- **BeautifulSoup Team** - Powerful HTML parsing
-- **Font Awesome** - Beautiful icon library
-- **Python Community** - Amazing ecosystem
-
-## 📞 Support
-
-For support, please open an issue on GitHub or contact the development team.
 
 ### Reporting Issues
 1. **Check Existing Issues** - Search before creating new ones
