@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PricePulse - Compare Prices Across E-commerce Platforms</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #3f37c9;
+      --accent: #4cc9f0;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4ade80;
+      --warning: #facc15;
+      --danger: #f87171;
+      --gray: #6c757d;
+      --gray-light: #e2e8f0;
+      --border-radius: 12px;
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --box-shadow-hover: 0 6px 25px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e6f0ff 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(30deg);
+    }
+    
+    .logo {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .logo i {
+      background: white;
+      color: var(--primary);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      position: relative;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .search-box {
+      display: flex;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(67, 97, 238, 0.2);
+      border-radius: 50px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .search-box:hover {
+      box-shadow: 0 12px 30px rgba(67, 97, 238, 0.3);
+    }
+    
+    input { 
+      flex: 1;
+      padding: 18px 25px;
+      border: none;
+      font-size: 1.1rem;
+      outline: none;
+      background: white;
+    }
+    
+    input::placeholder {
+      color: var(--gray);
+    }
+    
+    button { 
+      padding: 18px 35px;
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    button:hover {
+      background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .method-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .method-btn {
+      padding: 12px 25px;
+      background: white;
+      border: 2px solid var(--gray-light);
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .method-btn.active {
+      background: var(--primary-dark);
+      color: white;
+      border-color: var(--primary-dark);
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .method-btn:hover:not(.active) {
+      border-color: var(--primary);
+      background: #f8fafc;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    .tips {
+      background: white;
+      border-left: 4px solid var(--accent);
+      padding: 22px;
+      margin: 25px auto 35px;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      box-shadow: var(--box-shadow);
+      max-width: 800px;
+      animation: slideIn 0.6s ease-out;
+    }
+    
+    .tips h3 {
+      margin-top: 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.3rem;
+    }
+    
+    .tips ul {
+      margin-bottom: 0;
+      padding-left: 22px;
+    }
+    
+    .tips li {
+      margin-bottom: 10px;
+      padding-left: 8px;
+    }
+    
+    .result { 
+      margin-top: 20px; 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 25px;
+    }
+    
+    .site-results {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 25px;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      border-top: 4px solid var(--primary);
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .site-results:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow-hover);
+    }
+    
+    .site-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f0f2f5;
+    }
+    
+    .site-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    .flipkart { background: #2874f0; }
+    .amazon { background: #ff9900; }
+    .reliance { background: #ff0000; }
+    
+    .site-results h2 {
+      color: var(--dark);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .method-badge {
+      background: #e2e8f0;
+      color: #4a5568;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .product { 
+      margin-bottom: 20px; 
+      padding: 18px;
+      border: 1px solid #eef2f7;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+    
+    .product:hover {
+      border-color: var(--accent);
+      background: #f8fbff;
+      transform: translateX(3px);
+    }
+    
+    .product a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 12px;
+      transition: var(--transition);
+    }
+    
+    .product a:hover {
+      color: var(--primary);
+    }
+    
+    .product strong {
+      color: #059669;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    
+    .error {
+      color: #dc2626;
+      background-color: #fef2f2;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin: 15px 0;
+      border-left: 4px solid #dc2626;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--gray);
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    
+    .loading i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      animation: spin 1.5s linear infinite;
+    }
+    
+    .loading h3 {
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .loading p {
+      margin-bottom: 10px;
+      color: var(--gray);
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    .retry-button {
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.2);
+    }
+    
+    .retry-button:hover {
+      background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
+    }
+    
+    .generic-button {
+      background: #64748b;
+      margin-left: 12px;
+    }
+    
+    .generic-button:hover {
+      background: #475569;
+      box-shadow: 0 6px 15px rgba(100, 116, 139, 0.3);
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 25px;
+      color: var(--gray);
+      font-size: 0.9rem;
+      animation: fadeIn 1s ease-out;
+    }
+    
+    @media (max-width: 768px) {
+      .search-container {
+        flex-direction: column;
+      }
+      
+      input, button {
+        width: 100%;
+        border-radius: var(--border-radius);
+      }
+      
+      .search-box {
+        flex-direction: column;
+        border-radius: var(--border-radius);
+      }
+      
+      input {
+        border-bottom: 1px solid #eef2f7;
+      }
+      
+      .result {
+        grid-template-columns: 1fr;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .logo {
+        font-size: 2.2rem;
+      }
+      
+      .method-selector {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .method-btn {
+        width: 80%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <i class="fas fa-chart-line"></i>
+        <h1>PricePulse</h1>
+      </div>
+      <p>Compare prices across multiple e-commerce platforms in real-time</p>
+    </header>
+    
+    <div class="tips">
+      <h3><i class="fas fa-lightbulb"></i> Tips for Better Results</h3>
+      <ul>
+        <li>Try generic product names (e.g., "iPhone" instead of "iPhone 15 Pro Max")</li>
+        <li>If you see errors, wait a few minutes and try again</li>
+        <li>Some products may not be available on all platforms</li>
+        <li>Use the retry buttons when searches fail</li>
+        <li>Try switching between API and Scraping methods</li>
+      </ul>
+    </div>
+    
+    <div class="method-selector">
+      <button class="method-btn active" id="scrape-btn" onclick="setMethod('scrape')">
+        <i class="fas fa-spider"></i> Web Scraping
+      </button>
+      <button class="method-btn" id="api-btn" onclick="setMethod('api')">
+        <i class="fas fa-plug"></i> API Method
+      </button>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search for products (e.g. iPhone, laptop, shoes)"/>
+        <button onclick="search()">
+          <i class="fas fa-search"></i>
+          Search
+        </button>
+      </div>
+    </div>
+    
+    <div class="result" id="result"></div>
+    
+    <footer>
+      <p>PricePulse &copy; 2023 - Compare prices smarter, save more</p>
+    </footer>
+  </div>
+
+  <script>
+    // Store the last search query and method for retry functionality
+    let lastSearchQuery = "";
+    let currentMethod = "scrape";
+    
+    // Set the search method (scraping or API)
+    function setMethod(method) {
+      currentMethod = method;
+      
+      // Update UI
+      document.getElementById('scrape-btn').classList.toggle('active', method === 'scrape');
+      document.getElementById('api-btn').classList.toggle('active', method === 'api');
+    }
+    
+    // Allow Enter key to trigger search
+    document.getElementById("searchInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        search();
+      }
+    });
+
+    async function search(query = null) {
+      // Use provided query or get from input field
+      const searchQuery = query || document.getElementById("searchInput").value.trim();
+      const resultDiv = document.getElementById("result");
+      
+      // Validate input
+      if (!searchQuery) {
+        resultDiv.innerHTML = `
+          <div class="error">
+            <i class="fas fa-exclamation-circle"></i>
+            Please enter a product name to search
+          </div>
+        `;
+        return;
+      }
+      
+      // Store the query for potential retries
+      lastSearchQuery = searchQuery;
+      
+      resultDiv.innerHTML = `
+        <div class="loading">
+          <i class="fas fa-spinner"></i>
+          <h3>Searching for "${searchQuery}"</h3>
+          <p>Using ${currentMethod === 'api' ? 'API method' : 'web scraping'}...</p>
+          <small>This may take 10-30 seconds</small>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(`/compare?query=${encodeURIComponent(searchQuery)}&method=${currentMethod}`);
+        const data = await res.json();
+
+        if (data.error) {
+          // Show detailed error with retry option
+          let errorHtml = `
+            <div class="error">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h3>Error fetching data</h3>
+              <p>${data.error.replace(/\n/g, '<br/>')}</p>
+          `;
+          
+          // Add retry buttons
+          errorHtml += `
+            <br/>
+            <button class="retry-button" onclick="retrySearch()">
+              <i class="fas fa-redo"></i> Retry Search
+            </button>
+            <button class="retry-button generic-button" onclick="search('phone')">
+              <i class="fas fa-magic"></i> Try Generic Search
+            </button>
+          `;
+          
+          // Add method switch suggestion
+          if (currentMethod === 'api') {
+            errorHtml += `
+              <br/><br/>
+              <small>Try switching to Web Scraping method for better compatibility</small>
+            `;
+          }
+          
+          errorHtml += `</div>`;
+          resultDiv.innerHTML = errorHtml;
+          return;
+        }
+
+        let html = "";
+        for (let site in data) {
+          // Add site-specific icons and colors
+          let iconClass = "";
+          let siteClass = "";
+          
+          if (site.includes("Flipkart")) {
+            iconClass = "flipkart";
+            siteClass = "flipkart";
+          } else if (site.includes("Amazon")) {
+            iconClass = "amazon";
+            siteClass = "amazon";
+          } else if (site.includes("Reliance")) {
+            iconClass = "reliance";
+            siteClass = "reliance";
+          }
+          
+          html += `
+            <div class="site-results">
+              <div class="site-header">
+                <div class="site-icon ${siteClass}">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h2>${site} <span class="method-badge">${currentMethod === 'api' ? 'API' : 'Scraped'}</span></h2>
+              </div>
+          `;
+          
+          if (Array.isArray(data[site]) && data[site].length > 0) {
+            data[site].forEach(item => {
+              if (item.error) {
+                html += `<div class="error">${item.error}</div>`;
+              } else {
+                html += `
+                  <div class="product">
+                    <a href="${item.link}" target="_blank">${item.name}</a>
+                    <strong>${item.price}</strong>
+                  </div>
+                `;
+              }
+            });
+          } else {
+            html += `
+              <div class="error">
+                <i class="fas fa-search"></i>
+                No products found on this platform
+              </div>
+            `;
+          }
+          
+          html += `</div>`;
+        }
+        resultDiv.innerHTML = html;
+      } catch (err) {
+        resultDiv.innerHTML = `
+          <div class="error">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>Connection Error</h3>
+            <p>Unable to connect to the server. Please make sure the application is running.</p>
+            <button class="retry-button" onclick="retrySearch()">
+              <i class="fas fa-redo"></i> Retry Search
+            </button>
+            <button class="retry-button generic-button" onclick="search('phone')">
+              <i class="fas fa-magic"></i> Try Generic Search
+            </button>
+          </div>
+        `;
+        console.error("Search error:", err);
+      }
+    }
+    
+    // Dedicated retry function with delay
+    function retrySearch() {
+      if (lastSearchQuery) {
+        // Add a delay before retrying to help avoid rate limiting
+        document.getElementById("result").innerHTML = `
+          <div class="loading">
+            <i class="fas fa-clock"></i>
+            <h3>Preparing to retry...</h3>
+            <p>Adding delay to avoid rate limiting</p>
+            <small>Please wait 3 seconds</small>
+          </div>
+        `;
+        
+        // Wait 3 seconds before retrying
+        setTimeout(() => {
+          search(lastSearchQuery);
+        }, 3000);
+      } else {
+        // If no previous search, focus on the input field
+        document.getElementById("searchInput").focus();
+      }
+    }
+  </script>
+</body>
+</html>
